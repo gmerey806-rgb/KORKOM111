@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Админ панель — KINOPARK 7</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --navy: #07101f;
+            --navy-2: #101c31;
+
+            --ink: #172554;
+            --muted: #64748b;
+            --line: #e2e8f0;
+
+            --blue: #2563eb;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+
+            --green: #16a34a;
+            --red: #dc2626;
+            --orange: #ea580c;
+
+            --button:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            --warm:
+                linear-gradient(
+                    135deg,
+                    #facc15,
+                    #f97316,
+                    #ec4899
+                );
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--ink);
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff,
+                    #f8fafc
+                );
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            cursor: pointer;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 14px 0;
+
+            background: #ffffff;
+            border-bottom: 1px solid var(--line);
+
+            box-shadow:
+                0 4px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .topbar {
+            width: min(1200px, calc(100% - 32px));
+
+            min-height: 64px;
+
+            margin: auto;
+            padding: 10px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            border: 1px solid var(--line);
+            border-radius: 16px;
+
+            background: #ffffff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--ink);
+
+            font-size: 20px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: #ffffff;
+            background: var(--warm);
+        }
+
+        .admin-label {
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .logout-button {
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            color: #991b1b;
+            background: #fee2e2;
+
+            font-size: 12px;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background: #fecaca;
+        }
+
+        /* LAYOUT */
+
+        .container {
+            width: min(1200px, calc(100% - 32px));
+
+            margin: auto;
+            padding: 42px 0 80px;
+        }
+
+        .page-heading {
+            margin-bottom: 28px;
+        }
+
+        .page-heading p {
+            color: #e11d48;
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.4px;
+        }
+
+        .page-heading h1 {
+            margin-top: 10px;
+
+            color: var(--ink);
+
+            font-family: Georgia, serif;
+            font-size: clamp(36px, 5vw, 56px);
+        }
+
+        .page-heading h1 span {
+            background: var(--button);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-heading small {
+            display: block;
+
+            margin-top: 9px;
+
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns:
+                minmax(280px, 0.8fr)
+                minmax(0, 1.2fr);
+
+            gap: 20px;
+        }
+
+        .box {
+            padding: 23px;
+
+            border: 1px solid var(--line);
+            border-radius: 16px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.07);
+        }
+
+        .box h2 {
+            margin-bottom: 18px;
+
+            color: var(--ink);
+            font-size: 21px;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 17px;
+
+            border: 1px solid var(--line);
+            border-radius: 13px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 7px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .stat-icon {
+            font-size: 25px;
+        }
+
+        .stat strong {
+            display: block;
+
+            margin-top: 10px;
+
+            color: var(--ink);
+            font-size: 25px;
+        }
+
+        .stat span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* FORM */
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            color: #475569;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+
+            color: var(--ink);
+            background: #ffffff;
+
+            font-size: 13px;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--blue);
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            color: #ffffff;
+            background: var(--button);
+
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 9px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .hint {
+            margin-top: 12px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* MOVIE LIST */
+
+        .list-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            margin-bottom: 13px;
+        }
+
+        .list-head h2 {
+            margin-bottom: 0;
+        }
+
+        .clear-button {
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            color: #991b1b;
+            background: #fee2e2;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .clear-button:hover {
+            background: #fecaca;
+        }
+
+        .movie-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .movie-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 13px;
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            background: #ffffff;
+        }
+
+        .movie-card img {
+            width: 70px;
+            height: 92px;
+
+            flex: 0 0 70px;
+
+            display: block;
+
+            border-radius: 8px;
+
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .movie-data {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .movie-data h3 {
+            color: var(--ink);
+            font-size: 17px;
+        }
+
+        .movie-data p {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .movie-id {
+            display: inline-block;
+
+            margin-top: 8px;
+            padding: 4px 7px;
+
+            border-radius: 5px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .delete-button {
+            padding: 9px 11px;
+
+            border-radius: 8px;
+
+            color: #ffffff;
+            background: var(--red);
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .delete-button:hover {
+            background: #b91c1c;
+        }
+
+        .empty {
+            padding: 28px;
+
+            border: 1px dashed #cbd5e1;
+            border-radius: 11px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* BOOKINGS */
+
+        .booking-box {
+            margin-top: 20px;
+        }
+
+        .booking-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            margin-bottom: 14px;
+        }
+
+        .booking-head h2 {
+            margin-bottom: 0;
+        }
+
+        .booking-count {
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            color: #166534;
+            background: #dcfce7;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .booking-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .booking-card {
+            padding: 16px;
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f8fafc
+                );
+        }
+
+        .booking-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .booking-top h3 {
+            color: var(--ink);
+            font-size: 16px;
+        }
+
+        .booking-code {
+            padding: 6px 8px;
+
+            border-radius: 6px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px 18px;
+
+            margin-top: 13px;
+        }
+
+        .booking-details div {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .booking-details strong {
+            color: var(--ink);
+        }
+
+        .booking-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+
+            margin-top: 14px;
+            padding-top: 12px;
+
+            border-top: 1px solid var(--line);
+        }
+
+        .booking-price {
+            color: #b45309;
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .booking-delete {
+            padding: 8px 10px;
+
+            border-radius: 7px;
+
+            color: #991b1b;
+            background: #fee2e2;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .booking-delete:hover {
+            background: #fecaca;
+        }
+
+        .total-revenue {
+            margin-top: 12px;
+            padding: 14px;
+
+            border-radius: 10px;
+
+            color: #166534;
+            background: #f0fdf4;
+
+            font-size: 14px;
+            font-weight: 900;
+            text-align: right;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 20;
+
+            max-width: 330px;
+
+            padding: 13px 16px;
+
+            border-radius: 9px;
+
+            color: #ffffff;
+            background: #111827;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+
+            opacity: 0;
+            pointer-events: none;
+
+            transform: translateY(15px);
+            transition: 0.25s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .topbar {
+                flex-direction: column;
+            }
+
+            .container {
+                width: calc(100% - 20px);
+                padding-top: 28px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .movie-card {
+                align-items: flex-start;
+            }
+
+            .movie-card img {
+                width: 60px;
+                height: 80px;
+                flex-basis: 60px;
+            }
+
+            .movie-data h3 {
+                font-size: 14px;
+            }
+
+            .delete-button {
+                padding: 7px;
+                font-size: 10px;
+            }
+
+            .booking-details {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                right: 10px;
+                bottom: 10px;
+                left: 10px;
+
+                max-width: none;
+
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        if (sessionStorage.getItem("adminLoggedIn") !== "true") {
+            window.location.replace("login.html");
+        }
+    </script>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="topbar">
+
+            <div class="logo">
+                <span>7</span>
+                KINOPARK
+            </div>
+
+            <div class="admin-label">
+                Админ панель
+            </div>
+
+            <a
+                class="logout-button"
+                href="login.html"
+                onclick="sessionStorage.removeItem('adminLoggedIn')"
+            >
+                Шығу
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <section class="page-heading">
+
+            <p>
+                KINOPARK 7 • ADMIN
+            </p>
+
+            <h1>
+                Басқару
+                <span>панелі</span>
+            </h1>
+
+            <small>
+                Фильмдер мен брондалған билеттерді осы жерден басқарыңыз.
+            </small>
+
+        </section>
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    
+                </div>
+
+                <strong id="movieTotal">
+                    0
+                </strong>
+
+                <span>
+                    Фильм саны
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    
+                </div>
+
+                <strong id="bookingTotal">
+                    0
+                </strong>
+
+                <span>
+                    Бронь саны
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    
+                </div>
+
+                <strong id="seatTotal">
+                    0
+                </strong>
+
+                <span>
+                    Орын саны
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    
+                </div>
+
+                <strong id="revenueTotal">
+                    0 ₸
+                </strong>
+
+                <span>
+                    Жалпы табыс
+                </span>
+
+            </div>
+
+        </section>
+
+        <div class="dashboard-grid">
+
+            <!-- ADD MOVIE -->
+
+            <section class="box">
+
+                <h2>
+                     Фильм қосу
+                </h2>
+
+                <div class="field">
+
+                    <label for="title">
+                        Фильм атауы
+                    </label>
+
+                    <input
+                        id="title"
+                        type="text"
+                        placeholder="Мысалы: Вышка 2"
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="genre">
+                        Жанры
+                    </label>
+
+                    <input
+                        id="genre"
+                        type="text"
+                        placeholder="Триллер • Драма"
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="duration">
+                        Ұзақтығы
+                    </label>
+
+                    <input
+                        id="duration"
+                        type="text"
+                        placeholder="1 сағ 56 мин"
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="age">
+                        Жас шектеуі
+                    </label>
+
+                    <input
+                        id="age"
+                        type="text"
+                        placeholder="16+"
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label for="poster">
+                        Постер URL-і
+                    </label>
+
+                    <input
+                        id="poster"
+                        type="url"
+                        placeholder="https://example.com/poster.jpg"
+                    >
+
+                </div>
+
+                <button
+                    class="form-button"
+                    id="addMovieButton"
+                    type="button"
+                >
+                    + Фильм қосу
+                </button>
+
+                <p class="hint">
+                    Постер үшін суреттің тікелей URL сілтемесін енгізіңіз.
+                    Мысалы: https://site.com/poster.jpg
+                </p>
+
+            </section>
+
+            <!-- MOVIES -->
+
+            <section class="box">
+
+                <div class="list-head">
+
+                    <h2>
+                        📋 Фильмдер тізімі
+                    </h2>
+
+                    <button
+                        id="clearMoviesButton"
+                        class="clear-button"
+                        type="button"
+                    >
+                        Фильмдерді тазалау
+                    </button>
+
+                </div>
+
+                <div
+                    id="movieList"
+                    class="movie-list"
+                >
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- BOOKINGS -->
+
+        <section class="box booking-box">
+
+            <div class="booking-head">
+
+                <h2>
+                    🎟️ Брондалған билеттер
+                </h2>
+
+                <span
+                    id="bookingBadge"
+                    class="booking-count"
+                >
+                    0 бронь
+                </span>
+
+            </div>
+
+            <div
+                id="bookingList"
+                class="booking-list"
+            >
+            </div>
+
+            <div
+                id="totalRevenue"
+                class="total-revenue"
+            >
+                Жалпы табыс: 0 ₸
+            </div>
+
+        </section>
+
+    </main>
+
+    <div
+        id="toast"
+        class="toast"
+    >
+    </div>
+
+    <script>
+        /*
+         * Сақталған фильмдер мен броньдарды оқу.
+         */
+
+        let movies =
+            JSON.parse(
+                localStorage.getItem(
+                    "adminMovies"
+                )
+            ) || [];
+
+        let bookings =
+            JSON.parse(
+                localStorage.getItem(
+                    "kinoparkBookings"
+                )
+            ) || [];
+
+        /*
+         * HTML элементтері.
+         */
+
+        const movieList =
+            document.getElementById(
+                "movieList"
+            );
+
+        const bookingList =
+            document.getElementById(
+                "bookingList"
+            );
+
+        const movieTotal =
+            document.getElementById(
+                "movieTotal"
+            );
+
+        const bookingTotal =
+            document.getElementById(
+                "bookingTotal"
+            );
+
+        const seatTotal =
+            document.getElementById(
+                "seatTotal"
+            );
+
+        const revenueTotal =
+            document.getElementById(
+                "revenueTotal"
+            );
+
+        const bookingBadge =
+            document.getElementById(
+                "bookingBadge"
+            );
+
+        const totalRevenue =
+            document.getElementById(
+                "totalRevenue"
+            );
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+        /*
+         * Хабарлама шығару.
+         */
+
+        function showToast(text) {
+            toast.textContent =
+                text;
+
+            toast.classList.add(
+                "show"
+            );
+
+            clearTimeout(
+                showToast.timer
+            );
+
+            showToast.timer =
+                setTimeout(
+                    () => {
+                        toast.classList.remove(
+                            "show"
+                        );
+                    },
+                    2200
+                );
+        }
+
+        /*
+         * HTML мәтінін қауіпсіз шығару.
+         */
+
+        function escapeHTML(value) {
+            return String(value || "")
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+
+        /*
+         * Фильмдерді экранға шығару.
+         */
+
+        function renderMovies() {
+            movieList.innerHTML =
+                "";
+
+            if (movies.length === 0) {
+                movieList.innerHTML = `
+                    <div class="empty">
+                        Әзірге фильм қосылмаған.
+                    </div>
+                `;
+
+                return;
+            }
+
+            movies.forEach(
+                (movie, index) => {
+
+                    movieList.innerHTML += `
+                        <article class="movie-card">
+
+                            <img
+                                src="${escapeHTML(
+                                    movie.poster
+                                )}"
+                                alt="${escapeHTML(
+                                    movie.title
+                                )}"
+                                onerror="
+                                    this.src =
+                                    'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80'
+                                "
+                            >
+
+                            <div class="movie-data">
+
+                                <h3>
+                                    ${escapeHTML(
+                                        movie.title
+                                    )}
+                                </h3>
+
+                                <p>
+                                    ${escapeHTML(
+                                        movie.genre
+                                    )}
+                                </p>
+
+                                <p>
+                                    ${escapeHTML(
+                                        movie.duration
+                                    )}
+                                    •
+                                    ${escapeHTML(
+                                        movie.age
+                                    )}
+                                </p>
+
+                                <span class="movie-id">
+                                    ID: ${escapeHTML(
+                                        movie.id
+                                    )}
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="delete-button"
+                                type="button"
+                                onclick="
+                                    deleteMovie(${index})
+                                "
+                            >
+                                Өшіру
+                            </button>
+
+                        </article>
+                    `;
+                }
+            );
+        }
+
+        /*
+         * Броньдарды экранға шығару.
+         */
+
+        function renderBookings() {
+            bookingList.innerHTML =
+                "";
+
+            if (bookings.length === 0) {
+                bookingList.innerHTML = `
+                    <div class="empty">
+                        Әзірге брондалған билет жоқ.
+                    </div>
+                `;
+
+                updateStats();
+
+                return;
+            }
+
+            bookings.forEach(
+                (booking, index) => {
+
+                    const seats =
+                        Array.isArray(
+                            booking.seats
+                        )
+                            ? booking.seats
+                            : [];
+
+                    const seatText =
+                        seats.length
+                            ? seats.join(", ")
+                            : "Көрсетілмеген";
+
+                    const price =
+                        Number(
+                            booking.total
+                        ) || 0;
+
+                    bookingList.innerHTML += `
+                        <article class="booking-card">
+
+                            <div class="booking-top">
+
+                                <h3>
+                                    🎬
+                                    ${escapeHTML(
+                                        booking.movie ||
+                                        "Фильм көрсетілмеген"
+                                    )}
+                                </h3>
+
+                                <span class="booking-code">
+                                    ${escapeHTML(
+                                        booking.code ||
+                                        "КОД ЖОҚ"
+                                    )}
+                                </span>
+
+                            </div>
+
+                            <div class="booking-details">
+
+                                <div>
+                                    Клиент:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.customer ||
+                                            "Көрсетілмеген"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Күні:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.day ||
+                                            "Көрсетілмеген"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Сеанс:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.time ||
+                                            "Көрсетілмеген"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Зал:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.hall ||
+                                            "Зал №3"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Орындар:
+                                    <strong>
+                                        ${escapeHTML(
+                                            seatText
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Төлем:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.payment ||
+                                            "Картамен"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    Статус:
+                                    <strong>
+                                        ${escapeHTML(
+                                            booking.status ||
+                                            "Забронирован"
+                                        )}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div class="booking-bottom">
+
+                                <strong class="booking-price">
+                                    ${price.toLocaleString()}
+                                    ₸
+                                </strong>
+
+                                <button
+                                    class="booking-delete"
+                                    type="button"
+                                    onclick="
+                                        deleteBooking(${index})
+                                    "
+                                >
+                                    Броньды өшіру
+                                </button>
+
+                            </div>
+
+                        </article>
+                    `;
+                }
+            );
+
+            updateStats();
+        }
+
+        /*
+         * Статистика.
+         */
+
+        function updateStats() {
+            const movieCount =
+                movies.length;
+
+            const bookingCount =
+                bookings.length;
+
+            const seatsCount =
+                bookings.reduce(
+                    (sum, booking) => {
+
+                        const seats =
+                            Array.isArray(
+                                booking.seats
+                            )
+                                ? booking.seats.length
+                                : 0;
+
+                        return sum + seats;
+                    },
+                    0
+                );
+
+            const revenue =
+                bookings.reduce(
+                    (sum, booking) => {
+                        return (
+                            sum +
+                            (
+                                Number(
+                                    booking.total
+                                ) || 0
+                            )
+                        );
+                    },
+                    0
+                );
+
+            movieTotal.textContent =
+                movieCount;
+
+            bookingTotal.textContent =
+                bookingCount;
+
+            seatTotal.textContent =
+                seatsCount;
+
+            revenueTotal.textContent =
+                `${revenue.toLocaleString()} ₸`;
+
+            bookingBadge.textContent =
+                `${bookingCount} бронь`;
+
+            totalRevenue.textContent =
+                `Жалпы табыс: ${
+                    revenue.toLocaleString()
+                } ₸`;
+        }
+
+        /*
+         * Жаңа фильм қосу.
+         */
+
+        function addMovie() {
+            const title =
+                document
+                    .getElementById(
+                        "title"
+                    )
+                    .value
+                    .trim();
+
+            const genre =
+                document
+                    .getElementById(
+                        "genre"
+                    )
+                    .value
+                    .trim();
+
+            const duration =
+                document
+                    .getElementById(
+                        "duration"
+                    )
+                    .value
+                    .trim();
+
+            const age =
+                document
+                    .getElementById(
+                        "age"
+                    )
+                    .value
+                    .trim();
+
+            const poster =
+                document
+                    .getElementById(
+                        "poster"
+                    )
+                    .value
+                    .trim();
+
+            if (
+                !title ||
+                !genre ||
+                !duration ||
+                !age ||
+                !poster
+            ) {
+                showToast(
+                    "Барлық жолды толтырыңыз."
+                );
+
+                return;
+            }
+
+            const newMovie = {
+                id:
+                    Date.now()
+                        .toString(),
+
+                title,
+                genre,
+                duration,
+                age,
+                poster
+            };
+
+            movies.push(
+                newMovie
+            );
+
+            localStorage.setItem(
+                "adminMovies",
+                JSON.stringify(
+                    movies
+                )
+            );
+
+            document
+                .getElementById(
+                    "title"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "genre"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "duration"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "age"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "poster"
+                )
+                .value = "";
+
+            renderMovies();
+
+            showToast(
+                "Фильм сәтті қосылды."
+            );
+        }
+
+        /*
+         * Фильм өшіру.
+         */
+
+        function deleteMovie(index) {
+            const movie =
+                movies[index];
+
+            const answer =
+                confirm(
+                    `${
+                        movie.title
+                    } фильмін өшіру керек пе?`
+                );
+
+            if (!answer) {
+                return;
+            }
+
+            movies.splice(
+                index,
+                1
+            );
+
+            localStorage.setItem(
+                "adminMovies",
+                JSON.stringify(
+                    movies
+                )
+            );
+
+            renderMovies();
+
+            showToast(
+                "Фильм өшірілді."
+            );
+        }
+
+        /*
+         * Бронь өшіру.
+         */
+
+        function deleteBooking(index) {
+            const answer =
+                confirm(
+                    "Бұл броньды өшіру керек пе?"
+                );
+
+            if (!answer) {
+                return;
+            }
+
+            bookings.splice(
+                index,
+                1
+            );
+
+            localStorage.setItem(
+                "kinoparkBookings",
+                JSON.stringify(
+                    bookings
+                )
+            );
+
+            renderBookings();
+
+            showToast(
+                "Бронь өшірілді."
+            );
+        }
+
+        /*
+         * Барлық фильмді өшіру.
+         */
+
+        document
+            .getElementById(
+                "clearMoviesButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        movies.length === 0
+                    ) {
+                        showToast(
+                            "Өшіретін фильм жоқ."
+                        );
+
+                        return;
+                    }
+
+                    const answer =
+                        confirm(
+                            "Барлық фильм өшірілсін бе?"
+                        );
+
+                    if (!answer) {
+                        return;
+                    }
+
+                    movies = [];
+
+                    localStorage.setItem(
+                        "adminMovies",
+                        JSON.stringify(
+                            movies
+                        )
+                    );
+
+                    renderMovies();
+
+                    showToast(
+                        "Барлық фильм өшірілді."
+                    );
+                }
+            );
+
+        /*
+         * Фильм қосу батырмасы.
+         */
+
+        document
+            .getElementById(
+                "addMovieButton"
+            )
+            .addEventListener(
+                "click",
+                addMovie
+            );
+
+        /*
+         * Бастапқы экран.
+         */
+
+        renderMovies();
+
+        renderBookings();
+
+        /*
+         * Басқа бетте бронь қосылса,
+         * админ беті автоматты жаңарады.
+         */
+
+        window.addEventListener(
+            "storage",
+            () => {
+                movies =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "adminMovies"
+                        )
+                    ) || [];
+
+                bookings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "kinoparkBookings"
+                        )
+                    ) || [];
+
+                renderMovies();
+
+                renderBookings();
+            }
+        );
+    </script>
+
+</body>
+</html>

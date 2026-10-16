@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Админге кіру — KINOPARK 7</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: grid;
+            place-items: center;
+
+            padding: 20px;
+
+            color: #172554;
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #fdf2f8
+                );
+        }
+
+        .login-box {
+            width: min(410px, 100%);
+
+            padding: 30px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 20px 55px rgba(15, 23, 42, 0.13);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            color: #172554;
+
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .logo span {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #facc15,
+                    #f97316,
+                    #ec4899
+                );
+        }
+
+        h1 {
+            margin-top: 25px;
+
+            color: #172554;
+
+            font-family: Georgia, serif;
+            font-size: 31px;
+            text-align: center;
+        }
+
+        .subtitle {
+            margin-top: 9px;
+
+            color: #64748b;
+
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .field {
+            margin-top: 18px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #475569;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+
+            color: #172554;
+            background: #ffffff;
+
+            font-size: 13px;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .login-button {
+            width: 100%;
+
+            margin-top: 21px;
+            padding: 14px;
+
+            border: 0;
+            border-radius: 9px;
+
+            color: #ffffff;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 900;
+
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 22px rgba(37, 99, 235, 0.25);
+        }
+
+        .error {
+            display: none;
+
+            margin-top: 13px;
+            padding: 10px;
+
+            border-radius: 8px;
+
+            color: #991b1b;
+            background: #fee2e2;
+
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 18px;
+
+            color: #2563eb;
+
+            font-size: 12px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .back:hover {
+            color: #be123c;
+        }
+
+        .hint {
+            margin-top: 22px;
+            padding: 11px;
+
+            border-radius: 8px;
+
+            color: #475569;
+            background: #f8fafc;
+
+            font-size: 11px;
+            line-height: 1.5;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-box">
+
+        <div class="logo">
+            <span>7</span>
+            KINOPARK
+        </div>
+
+        <h1>
+            Админ панель
+        </h1>
+
+        <p class="subtitle">
+            Басқару панеліне кіру үшін логин мен парольді енгізіңіз.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="field">
+
+                <label for="username">
+                    Логин
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="Логинді енгізіңіз"
+                    autocomplete="username"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label for="password">
+                    Пароль
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Парольді енгізіңіз"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+            <button
+                class="login-button"
+                type="submit"
+            >
+                Кіру →
+            </button>
+
+            <div
+                id="error"
+                class="error"
+            >
+                Логин немесе пароль қате.
+            </div>
+
+        </form>
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Басты бетке қайту
+        </a>
+
+        <div class="hint">
+            Логин:
+            <strong>admin</strong>
+
+            <br>
+
+            Пароль:
+            <strong>111</strong>
+        </div>
+
+    </main>
+
+    <script>
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+        const username =
+            document.getElementById(
+                "username"
+            );
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+                event.preventDefault();
+
+                const enteredUsername =
+                    username.value.trim();
+
+                const enteredPassword =
+                    password.value;
+
+                const correctUsername =
+                    "admin";
+
+                const correctPassword =
+                    "111";
+
+                if (
+                    enteredUsername ===
+                        correctUsername &&
+                    enteredPassword ===
+                        correctPassword
+                ) {
+                    sessionStorage.setItem(
+                        "adminLoggedIn",
+                        "true"
+                    );
+
+                    window.location.href =
+                        "admin.html";
+
+                    return;
+                }
+
+                error.classList.add(
+                    "show"
+                );
+
+                password.value = "";
+            }
+        );
+    </script>
+
+</body>
+</html>

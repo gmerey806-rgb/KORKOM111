@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Кино таңдау — KINOPARK 7</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --nav: #07101f;
+            --ink: #172554;
+            --muted: #64748b;
+            --line: #e2e8f0;
+
+            --blue: #2563eb;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+
+            --warm:
+                linear-gradient(
+                    135deg,
+                    #ffe45e,
+                    #ff8a3d,
+                    #ff3d71
+                );
+
+            --button:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--ink);
+            font-family: Arial, Inter, sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #dbeafe 0%,
+                    #ede9fe 45%,
+                    #fce7f3 100%
+                );
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 14px 0;
+
+            background: var(--nav);
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        nav {
+            width: min(1200px, calc(100% - 32px));
+            min-height: 64px;
+
+            margin: auto;
+            padding: 10px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+
+            background: #101c31;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: #25152d;
+            background: var(--warm);
+        }
+
+        .menu {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .menu a {
+            padding: 9px 11px;
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(1200px, calc(100% - 32px));
+
+            margin: auto;
+            padding: 55px 0 90px;
+        }
+
+        .heading {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #e11d48;
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.4px;
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #ef4444;
+        }
+
+        .heading h1 {
+            margin: 17px 0 10px;
+
+            color: var(--ink);
+
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 6vw, 64px);
+        }
+
+        .heading h1 span {
+            background: var(--warm);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* FILTERS */
+
+        .filter-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            margin-bottom: 28px;
+        }
+
+        .filter-box input,
+        .filter-box select {
+            min-width: 220px;
+
+            padding: 13px 15px;
+
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            outline: none;
+
+            color: var(--ink);
+            background: #ffffff;
+
+            font-size: 13px;
+        }
+
+        .filter-box input:focus,
+        .filter-box select:focus {
+            border-color: var(--pink);
+
+            box-shadow:
+                0 0 0 3px rgba(236, 72, 153, 0.12);
+        }
+
+        .date-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-picker select {
+            min-width: 155px;
+        }
+
+        .date-picker #day {
+            min-width: 75px;
+            width: 75px;
+        }
+
+        /* MOVIES */
+
+        .movies {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .movie-row {
+            display: grid;
+
+            grid-template-columns:
+                145px
+                minmax(250px, 1fr)
+                minmax(330px, 1.25fr);
+
+            gap: 22px;
+            align-items: center;
+
+            padding: 16px;
+
+            border: 1px solid var(--line);
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    160deg,
+                    #ffffff,
+                    #f5f3ff
+                );
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.08);
+
+            transition: 0.25s;
+        }
+
+        .movie-row:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 42px rgba(15, 23, 42, 0.14);
+        }
+
+        .poster {
+            height: 200px;
+
+            overflow: hidden;
+
+            border-radius: 11px;
+            background: #e2e8f0;
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition: 0.4s;
+        }
+
+        .movie-row:hover .poster img {
+            transform: scale(1.06);
+        }
+
+        .movie-info h2 {
+            margin-bottom: 8px;
+
+            color: var(--ink);
+            font-size: 21px;
+        }
+
+        .genre {
+            margin-bottom: 10px;
+
+            color: #475569;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .tags {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+
+            margin-bottom: 11px;
+        }
+
+        .tag {
+            padding: 6px 8px;
+
+            border-radius: 6px;
+
+            color: #334155;
+            background: #f1f5f9;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .tag.age {
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        .desc {
+            max-width: 480px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .times {
+            align-self: stretch;
+
+            padding: 12px 0 12px 20px;
+
+            border-left: 1px solid var(--line);
+        }
+
+        .times h3 {
+            margin-bottom: 12px;
+
+            color: var(--ink);
+            font-size: 14px;
+        }
+
+        .time-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .time {
+            min-width: 68px;
+
+            padding: 10px 11px;
+
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+
+            font-size: 12px;
+            font-weight: 900;
+            text-align: center;
+
+            transition: 0.2s;
+        }
+
+        .time:hover {
+            color: #ffffff;
+            border-color: transparent;
+            background: var(--button);
+
+            transform: translateY(-3px);
+        }
+
+        .choose {
+            display: inline-block;
+
+            margin-top: 14px;
+            padding: 10px 13px;
+
+            border-radius: 8px;
+
+            color: #ffffff;
+            background: var(--button);
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .choose:hover {
+            transform: translateY(-2px);
+        }
+
+        .empty {
+            padding: 35px;
+
+            border-radius: 14px;
+
+            color: var(--muted);
+            background:
+                linear-gradient(
+                    160deg,
+                    #ffffff,
+                    #eef2ff
+                );
+
+            text-align: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .movie-row {
+                grid-template-columns:
+                    125px
+                    1fr;
+            }
+
+            .times {
+                grid-column: 1 / -1;
+
+                padding: 16px 0 0;
+
+                border-top: 1px solid var(--line);
+                border-left: 0;
+            }
+
+            .poster {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .menu {
+                justify-content: center;
+            }
+
+            .filter-box {
+                align-items: stretch;
+            }
+
+            .filter-box input,
+            .filter-box select {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .date-picker {
+                width: 100%;
+            }
+
+            .date-picker select {
+                flex: 1;
+                width: auto;
+                min-width: 0;
+            }
+
+            .date-picker #day {
+                width: 80px;
+                min-width: 80px;
+                flex: 0 0 80px;
+            }
+
+            .movie-row {
+                grid-template-columns:
+                    92px
+                    1fr;
+
+                gap: 14px;
+                padding: 12px;
+            }
+
+            .poster {
+                height: 132px;
+            }
+
+            .movie-info h2 {
+                font-size: 16px;
+            }
+
+            .genre,
+            .desc {
+                font-size: 11px;
+            }
+
+            .time {
+                min-width: 61px;
+
+                padding: 9px 8px;
+
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .movie-row {
+                grid-template-columns: 1fr;
+            }
+
+            .poster {
+                height: 260px;
+            }
+
+            .movie-info h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                <span>7</span>
+                KINOPARK
+            </a>
+
+             <div class="menu">
+
+                <a href="index.html" class="active">
+                    Басты бет
+                </a>
+
+                <a href="movie.html" class="active">
+                    Кино таңдау
+                </a>
+
+                <a href="seats.html" class="active">
+                    Орын таңдау
+                </a>
+
+                <a href="ticket.html" class="active">
+                    Билеттер
+                </a>
+
+                <a href="contacts.html" class="active">
+                    Байланыс
+                </a>
+                <a href="admin.html" class="active">
+                    Админстратор
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="heading">
+
+            <p class="eyebrow">
+                KINOPARK 7 • АҚТӨБЕ
+            </p>
+
+            <h1>
+                Кино
+                <span>таңдау</span>
+            </h1>
+
+            <p>
+                Фильмді және сеанс уақытын таңдаңыз.
+            </p>
+
+        </section>
+
+        <div class="filter-box">
+
+            <input
+                id="search"
+                type="search"
+                placeholder="Кино атауын іздеу..."
+            >
+
+            <select id="genre">
+
+                <option value="all">
+                    Барлық жанр
+                </option>
+
+                <option value="Комедия">
+                    Комедия
+                </option>
+
+                <option value="Триллер">
+                    Триллер
+                </option>
+
+                <option value="Драма">
+                    Драма
+                </option>
+
+                <option value="Боевик">
+                    Боевик
+                </option>
+
+                <option value="Ужасы">
+                    Ужасы
+                </option>
+
+                <option value="Фантастика">
+                    Фантастика
+                </option>
+
+            </select>
+
+            <!-- КІШКЕНТАЙ ДАТА ФИЛЬТРІ -->
+
+            <div class="date-picker">
+
+                <select id="month">
+
+                    <option value="2026-09">
+                        Қыркүйек 2026
+                    </option>
+
+                    <option value="2026-10">
+                        Қазан 2026
+                    </option>
+
+                </select>
+
+                <select id="day">
+                </select>
+
+            </div>
+
+        </div>
+
+        <section
+            id="movies"
+            class="movies"
+        >
+        </section>
+
+        <div
+            id="empty"
+            class="empty hidden"
+        >
+            Бұл іздеу бойынша кино табылмады.
+        </div>
+
+    </main>
+
+    <script>
+        const films = [
+            {
+                id: 1,
+                title: "14 күн",
+                genre: "Комедия • Драма • Қазақстан",
+                duration: "1 сағ 45 мин",
+                age: "16+",
+                description:
+                    "Дарханның өмірін өзгерткен он төрт күн туралы қазақстандық комедия.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/3817a03a-3961-535e-847f-d97c82cc64e7/0af98422-8d5d-5204-9f00-361f34eddb23.jpg",
+                times: [
+                    "10:20",
+                    "12:40",
+                    "15:00",
+                    "17:30",
+                    "20:00"
+                ]
+            },
+
+            {
+                id: 2,
+                title: "38. Соңғы нүкте",
+                genre: "Драма • Триллер",
+                duration: "1 сағ 52 мин",
+                age: "16+",
+                description:
+                    "Қауіпті құпия кейіпкерлерді соңғы шешім қабылдауға мәжбүр етеді.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/3496d9fc-0809-53a2-8f59-4bd9185d7455/78b7eb7a-896e-57ff-b047-c69590dd28e7.jpg",
+                times: [
+                    "11:30",
+                    "14:10",
+                    "16:50",
+                    "19:20",
+                    "22:00"
+                ]
+            },
+
+            {
+                id: 3,
+                title: "Астрал 6",
+                genre: "Ужасы • Триллер",
+                duration: "1 сағ 48 мин",
+                age: "18+",
+                description:
+                    "Тылсым әлеммен бетпе-бет келген отбасы қорқынышты құпияны ашады.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/82e38f17-2865-5fd3-98e2-52582eaa0a22/a1991191-6e8d-5dde-be47-dd7efca01bfb.jpg",
+                times: [
+                    "12:10",
+                    "14:50",
+                    "17:30",
+                    "20:10",
+                    "22:40"
+                ]
+            },
+
+            {
+                id: 4,
+                title: "Болған оқиға 2",
+                genre: "Комедия • Оқиға",
+                duration: "1 сағ 38 мин",
+                age: "16+",
+                description:
+                    "Қарапайым күн күлкілі әрі күтпеген оқиғаға айналады.",
+                image:
+                    "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=90",
+                times: [
+                    "10:00",
+                    "12:20",
+                    "14:40",
+                    "17:00",
+                    "19:30"
+                ]
+            },
+
+            {
+                id: 5,
+                title: "Вышка 2",
+                genre: "Триллер • Драма",
+                duration: "1 сағ 56 мин",
+                age: "16+",
+                description:
+                    "Биікте қалған кейіпкерлер тірі қалу үшін уақытпен жарысады.",
+                image:
+                    "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=90",
+                times: [
+                    "11:40",
+                    "14:20",
+                    "17:00",
+                    "19:40",
+                    "22:20"
+                ]
+            },
+
+            {
+                id: 6,
+                title: "Бегущая",
+                genre: "Боевик • Триллер",
+                duration: "1 сағ 42 мин",
+                age: "16+",
+                description:
+                    "Қауіпті қуғыннан қашқан кейіпкер аман қалудың жолын іздейді.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/6362e1ab-336c-5614-a2ee-75531753a1c9/4489c1e4-fff4-5973-9ced-bd9cf9de88d5.jpg",
+                times: [
+                    "10:30",
+                    "13:00",
+                    "15:30",
+                    "18:00",
+                    "20:30"
+                ]
+            },
+
+            {
+                id: 7,
+                title: "Крушение рейса",
+                genre: "Боевик • Ужасы • Триллер",
+                duration: "1 сағ 46 мин",
+                age: "16+",
+                description:
+                    "Ұшақ мұхитқа құлағаннан кейін аман қалған жолаушылар үшін күрес басталады.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/f957372c-606d-58eb-90c7-396cb894dcf7/81eb7c7a-0273-5988-a69b-29444c4f41c4.jpg",
+                times: [
+                    "12:00",
+                    "14:30",
+                    "17:00",
+                    "19:30",
+                    "22:00"
+                ]
+            },
+
+            {
+                id: 8,
+                title: "Надежда",
+                genre: "Фантастика • Экшен • Триллер",
+                duration: "2 сағ 10 мин",
+                age: "18+",
+                description:
+                    "Тыныш қаладағы жұмбақ оқиғалар ғаламдық қауіпке айналады.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/b9e8bc79-207d-5276-ac61-8da95d3f336e/8be74fa1-79a9-536b-b2b1-1e7a848b64b0.jpg",
+                times: [
+                    "10:40",
+                    "13:20",
+                    "16:00",
+                    "18:40",
+                    "21:20"
+                ]
+            },
+
+            {
+                id: 9,
+                title: "Фамилия",
+                genre: "Драма • Криминал",
+                duration: "1 сағ 50 мин",
+                age: "16+",
+                description:
+                    "Отбасының аты мен жеке арманның арасында қалған жас жігіттің оқиғасы.",
+                image:
+                    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=90",
+                times: [
+                    "11:00",
+                    "13:30",
+                    "16:00",
+                    "18:30",
+                    "21:00"
+                ]
+            },
+
+            {
+                id: 10,
+                title: "Бүркітші",
+                genre: "Драма • Қазақстан",
+                duration: "1 сағ 35 мин",
+                age: "16+",
+                description:
+                    "Бүркітші мен оның қыраны туралы дала рухын баяндайтын әсерлі хикая.",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/72f0e14c-c19f-56e1-85c0-87f309104270/0af98422-8d5d-5204-9f00-361f34eddb23.jpg",
+                times: [
+                    "10:10",
+                    "12:30",
+                    "14:50",
+                    "17:10",
+                    "19:30"
+                ]
+            }
+        ];
+
+        const monthSelect =
+            document.getElementById(
+                "month"
+            );
+
+        const daySelect =
+            document.getElementById(
+                "day"
+            );
+
+        const search =
+            document.getElementById(
+                "search"
+            );
+
+        const genre =
+            document.getElementById(
+                "genre"
+            );
+
+        const moviesContainer =
+            document.getElementById(
+                "movies"
+            );
+
+        const empty =
+            document.getElementById(
+                "empty"
+            );
+
+        function createDays() {
+            const parts =
+                monthSelect.value
+                    .split("-");
+
+            const year =
+                Number(parts[0]);
+
+            const month =
+                Number(parts[1]);
+
+            const daysInMonth =
+                new Date(
+                    year,
+                    month,
+                    0
+                ).getDate();
+
+            daySelect.innerHTML =
+                "";
+
+            for (
+                let day = 1;
+                day <= daysInMonth;
+                day += 1
+            ) {
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    `${year}-${String(
+                        month
+                    ).padStart(2, "0")}-${String(
+                        day
+                    ).padStart(2, "0")}`;
+
+                option.textContent =
+                    day;
+
+                daySelect.appendChild(
+                    option
+                );
+            }
+        }
+
+        function getSelectedDate() {
+            const parts =
+                daySelect.value
+                    .split("-");
+
+            const year =
+                parts[0];
+
+            const month =
+                Number(parts[1]);
+
+            const day =
+                Number(parts[2]);
+
+            const monthNames = [
+                "қаңтар",
+                "ақпан",
+                "наурыз",
+                "сәуір",
+                "мамыр",
+                "маусым",
+                "шілде",
+                "тамыз",
+                "қыркүйек",
+                "қазан",
+                "қараша",
+                "желтоқсан"
+            ];
+
+            return `${day} ${
+                monthNames[
+                    month - 1
+                ]
+            } ${year}`;
+        }
+
+        function getHall(movieId) {
+            const halls = {
+                1: "Зал №3",
+                2: "Зал №2",
+                3: "VIP зал",
+                4: "Зал №3",
+                5: "Зал №2",
+                6: "Зал №3",
+                7: "VIP зал",
+                8: "Зал №2",
+                9: "Зал №3",
+                10: "Зал №2"
+            };
+
+            return halls[movieId] ||
+                "Зал №3";
+        }
+
+        function createMovieRow(film) {
+            const date =
+                getSelectedDate();
+
+            const hall =
+                getHall(film.id);
+
+            function createUrl(time) {
+                return (
+                    "seats.html?" +
+                    "movie=" +
+                    encodeURIComponent(
+                        film.id
+                    ) +
+                    "&day=" +
+                    encodeURIComponent(
+                        date
+                    ) +
+                    "&time=" +
+                    encodeURIComponent(
+                        time
+                    ) +
+                    "&hall=" +
+                    encodeURIComponent(
+                        hall
+                    )
+                );
+            }
+
+            const row =
+                document.createElement(
+                    "article"
+                );
+
+            row.className =
+                "movie-row";
+
+            row.innerHTML = `
+                <a
+                    class="poster"
+                    href="${createUrl(
+                        film.times[0]
+                    )}"
+                >
+
+                    <img
+                        src="${film.image}"
+                        alt="${film.title}"
+                        onerror="
+                            this.src =
+                            'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=90'
+                        "
+                    >
+
+                </a>
+
+                <div class="movie-info">
+
+                    <h2>
+                        ${film.title}
+                    </h2>
+
+                    <p class="genre">
+                        ${film.genre}
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">
+                            ${film.duration}
+                        </span>
+
+                        <span class="tag age">
+                            ${film.age}
+                        </span>
+
+                    </div>
+
+                    <p class="desc">
+                        ${film.description}
+                    </p>
+
+                    <a
+                        class="choose"
+                        href="${createUrl(
+                            film.times[0]
+                        )}"
+                    >
+                        Фильмді таңдау →
+                    </a>
+
+                </div>
+
+                <div class="times">
+
+                    <h3>
+                        Сеанс уақыттары
+                    </h3>
+
+                    <div class="time-list">
+
+                        ${film.times
+                            .map(
+                                (time) => `
+                                    <a
+                                        class="time"
+                                        href="${createUrl(
+                                            time
+                                        )}"
+                                    >
+                                        ${time}
+                                    </a>
+                                `
+                            )
+                            .join("")}
+
+                    </div>
+
+                </div>
+            `;
+
+            return row;
+        }
+
+        function renderMovies() {
+            const text =
+                search.value
+                    .trim()
+                    .toLowerCase();
+
+            const selectedGenre =
+                genre.value;
+
+            const filtered =
+                films.filter(
+                    (film) => {
+
+                        const titleMatch =
+                            !text ||
+                            film.title
+                                .toLowerCase()
+                                .includes(
+                                    text
+                                );
+
+                        const genreMatch =
+                            selectedGenre ===
+                                "all" ||
+                            film.genre.includes(
+                                selectedGenre
+                            );
+
+                        return (
+                            titleMatch &&
+                            genreMatch
+                        );
+                    }
+                );
+
+            moviesContainer.innerHTML =
+                "";
+
+            empty.classList.toggle(
+                "hidden",
+                filtered.length > 0
+            );
+
+            filtered.forEach(
+                (film) => {
+                    moviesContainer.appendChild(
+                        createMovieRow(
+                            film
+                        )
+                    );
+                }
+            );
+        }
+
+        monthSelect.addEventListener(
+            "change",
+            () => {
+                createDays();
+                renderMovies();
+            }
+        );
+
+        daySelect.addEventListener(
+            "change",
+            renderMovies
+        );
+
+        search.addEventListener(
+            "input",
+            renderMovies
+        );
+
+        genre.addEventListener(
+            "change",
+            renderMovies
+        );
+
+        createDays();
+
+        renderMovies();
+    </script>
+
+</body>
+</html>

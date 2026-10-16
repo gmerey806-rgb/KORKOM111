@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Билет брондау — KINOPARK 7</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --nav: #07101f;
+            --ink: #172554;
+            --muted: #64748b;
+            --line: #e2e8f0;
+
+            --blue: #2563eb;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+            --green: #16a34a;
+
+            --warm:
+                linear-gradient(
+                    135deg,
+                    #ffe45e,
+                    #ff8a3d,
+                    #ff3d71
+                );
+
+            --button:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--ink);
+            font-family: Arial, Inter, sans-serif;
+
+            background: #f4f6fa;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 14px 0;
+
+            background: var(--nav);
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        nav {
+            width: min(1200px, calc(100% - 32px));
+            min-height: 64px;
+
+            margin: auto;
+            padding: 10px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+
+            background: #101c31;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: #25152d;
+            background: var(--warm);
+        }
+
+        .menu {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .menu a {
+            padding: 9px 11px;
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(1050px, calc(100% - 32px));
+
+            margin: auto;
+            padding: 48px 0 90px;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .page-title h1 {
+            margin: 13px 0 8px;
+
+            color: var(--ink);
+
+            font-family: Georgia, serif;
+            font-size: clamp(36px, 6vw, 58px);
+        }
+
+        .page-title h1 span {
+            background: var(--warm);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-title p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .eyebrow {
+            color: #e11d48;
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.4px;
+        }
+
+        /* CHECKOUT */
+
+        .checkout {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.2fr)
+                minmax(280px, 0.8fr);
+
+            gap: 22px;
+        }
+
+        .panel {
+            padding: 25px;
+
+            border: 1px solid var(--line);
+            border-radius: 18px;
+
+            background: #ffffff;
+            box-shadow:
+                0 12px 35px rgba(15, 23, 42, 0.09);
+        }
+
+        .panel h2 {
+            margin-bottom: 20px;
+
+            color: var(--ink);
+            font-size: 22px;
+        }
+
+        /* MOVIE SUMMARY */
+
+        .movie-summary {
+            display: flex;
+            gap: 16px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .movie-poster {
+            width: 100px;
+            height: 135px;
+            flex: 0 0 100px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+            background: #dbeafe;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .movie-summary h3 {
+            margin: 3px 0 10px;
+
+            color: var(--ink);
+            font-size: 21px;
+        }
+
+        .movie-summary p {
+            margin: 5px 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .summary-tags {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+
+            margin-top: 10px;
+        }
+
+        .summary-tags span {
+            padding: 5px 8px;
+
+            border-radius: 6px;
+
+            color: #334155;
+            background: #f1f5f9;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .summary-tags span:last-child {
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        .booking-info {
+            margin-top: 20px;
+        }
+
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #f1f5f9;
+
+            font-size: 14px;
+        }
+
+        .info-line span {
+            color: var(--muted);
+        }
+
+        .info-line strong {
+            color: var(--ink);
+            text-align: right;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: #475569;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .field input {
+            width: 100%;
+
+            padding: 13px 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: 0;
+
+            color: var(--ink);
+            background: #ffffff;
+
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .field input:focus {
+            border-color: var(--pink);
+            box-shadow:
+                0 0 0 3px rgba(236, 72, 153, 0.12);
+        }
+
+        .error {
+            display: none;
+
+            margin-top: 5px;
+
+            color: #dc2626;
+            font-size: 11px;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            margin-top: 16px;
+
+            color: #64748b;
+
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .check-row input {
+            margin-top: 2px;
+            accent-color: var(--blue);
+        }
+
+        /* ORDER SUMMARY */
+
+        .summary-card {
+            position: sticky;
+            top: 24px;
+        }
+
+        .summary-card h2 {
+            margin-bottom: 5px;
+        }
+
+        .summary-subtitle {
+            margin-bottom: 20px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .cost-line {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 12px 0;
+
+            color: #475569;
+            font-size: 13px;
+        }
+
+        .cost-line strong {
+            color: var(--ink);
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 10px;
+            padding-top: 16px;
+
+            border-top: 1px solid var(--line);
+
+            color: var(--ink);
+
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .total-line strong {
+            color: #b45309;
+        }
+
+        .pay-title {
+            margin: 24px 0 10px;
+
+            color: var(--ink);
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+        }
+
+        .pay-option {
+            padding: 10px 5px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+
+            color: #475569;
+            background: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .pay-option.selected {
+            border-color: var(--blue);
+
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .primary-btn {
+            width: 100%;
+
+            margin-top: 20px;
+            padding: 14px;
+
+            border: 0;
+            border-radius: 10px;
+
+            color: #ffffff;
+            background: var(--button);
+
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 900;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 23px rgba(37, 99, 235, 0.25);
+        }
+
+        .secondary-btn {
+            width: 100%;
+
+            margin-top: 9px;
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+
+            color: #475569;
+            background: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .secondary-btn:hover {
+            background: #f8fafc;
+        }
+
+        .secure {
+            margin-top: 18px;
+            padding: 12px;
+
+            border-radius: 9px;
+
+            color: #166534;
+            background: #f0fdf4;
+
+            font-size: 11px;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        /* SUCCESS */
+
+        .success {
+            display: none;
+            text-align: center;
+        }
+
+        .success.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 62px;
+            height: 62px;
+
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            color: #ffffff;
+            background: var(--green);
+
+            font-size: 32px;
+        }
+
+        .success h2 {
+            margin-bottom: 8px;
+        }
+
+        .success p {
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .booking-code {
+            display: inline-block;
+
+            margin: 17px 0;
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        /* MESSAGE */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 10;
+
+            padding: 13px 16px;
+
+            border-radius: 9px;
+
+            color: #ffffff;
+            background: #111827;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+
+            opacity: 0;
+            pointer-events: none;
+
+            transform: translateY(15px);
+
+            transition: 0.25s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .checkout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 550px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .menu {
+                justify-content: center;
+            }
+
+            main {
+                width: calc(100% - 20px);
+                padding-top: 28px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .movie-summary {
+                align-items: flex-start;
+            }
+
+            .movie-poster {
+                width: 82px;
+                height: 112px;
+                flex-basis: 82px;
+            }
+
+            .movie-summary h3 {
+                font-size: 18px;
+            }
+
+            .info-line {
+                font-size: 12px;
+            }
+
+            .toast {
+                right: 10px;
+                bottom: 10px;
+                left: 10px;
+
+                text-align: center;
+            }
+        }
+
+        @media print {
+            header,
+            .page-title,
+            .booking-form,
+            .summary-card,
+            .toast {
+                display: none !important;
+            }
+
+            body {
+                background: #ffffff;
+            }
+
+            .checkout {
+                display: block;
+            }
+
+            .panel {
+                border: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <a href="index.html" class="logo">
+                <span>7</span>
+                KINOPARK
+            </a>
+
+             <div class="menu">
+
+                <a href="index.html" class="active">
+                    Басты бет
+                </a>
+
+                <a href="movie.html" class="active">
+                    Кино таңдау
+                </a>
+
+                <a href="seats.html" class="active">
+                    Орын таңдау
+                </a>
+
+                <a href="ticket.html" class="active">
+                    Билеттер
+                </a>
+
+                <a href="contacts.html" class="active">
+                    Байланыс
+                </a>
+                <a href="admin.html" class="active">
+                    Админстратор
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="page-title">
+
+            <p class="eyebrow">
+                KINOPARK 7 • БИЛЕТ БРОНДАУ
+            </p>
+
+            <h1>
+                Билетті
+                <span>растау</span>
+            </h1>
+
+            <p>
+                Ақпаратты тексеріп, билетіңізді брондаңыз.
+            </p>
+
+        </section>
+
+        <div
+            id="bookingContent"
+            class="checkout"
+        >
+
+            <!-- СОЛ ЖАҚ -->
+
+            <section class="panel">
+
+                <h2>
+                    Сеанс туралы ақпарат
+                </h2>
+
+                <div class="movie-summary">
+
+                    <div class="movie-poster">
+                        <img
+                            id="ticketPoster"
+                            src=""
+                            alt="Фильм постері"
+                        >
+                    </div>
+
+                    <div>
+                        <h3 id="ticketMovie">
+                            —
+                        </h3>
+
+                        <p id="ticketGenre">
+                            —
+                        </p>
+
+                        <div class="summary-tags">
+                            <span id="ticketDuration">
+                                —
+                            </span>
+
+                            <span id="ticketAge">
+                                —
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="booking-info">
+
+                    <div class="info-line">
+                        <span>
+                            Күні
+                        </span>
+
+                        <strong id="ticketDay">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="info-line">
+                        <span>
+                            Сеанс
+                        </span>
+
+                        <strong id="ticketTime">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="info-line">
+                        <span>
+                            Зал
+                        </span>
+
+                        <strong id="ticketHall">
+                            Зал №3
+                        </strong>
+                    </div>
+
+                    <div class="info-line">
+                        <span>
+                            Орындар
+                        </span>
+
+                        <strong id="ticketSeat">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+                <h2 style="margin-top: 28px;">
+                    Байланыс ақпараты
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="customerName">
+                            Аты-жөніңіз
+                        </label>
+
+                        <input
+                            id="customerName"
+                            type="text"
+                            placeholder="Аты-жөніңіз"
+                        >
+
+                        <small
+                            id="nameError"
+                            class="error"
+                        >
+                            Аты-жөніңізді жазыңыз.
+                        </small>
+                    </div>
+
+                    <div class="field">
+                        <label for="customerPhone">
+                            Телефон нөмірі
+                        </label>
+
+                        <input
+                            id="customerPhone"
+                            type="tel"
+                            placeholder="+7 700 000 00 00"
+                        >
+
+                        <small
+                            id="phoneError"
+                            class="error"
+                        >
+                            Телефон нөмірін жазыңыз.
+                        </small>
+                    </div>
+
+                    <div class="field full">
+                        <label for="customerEmail">
+                            Email
+                        </label>
+
+                        <input
+                            id="customerEmail"
+                            type="email"
+                            placeholder="example@mail.com"
+                        >
+
+                        <small
+                            id="emailError"
+                            class="error"
+                        >
+                            Дұрыс email енгізіңіз.
+                        </small>
+                    </div>
+
+                </div>
+
+                <label class="check-row">
+                    <input
+                        id="agreement"
+                        type="checkbox"
+                    >
+
+                    <span>
+                        Мен билет туралы ақпаратты дұрыс
+                        енгізгенімді растаймын және брондау
+                        шарттарымен келісемін.
+                    </span>
+                </label>
+
+            </section>
+
+            <!-- ОҢ ЖАҚ -->
+
+            <aside class="panel summary-card">
+
+                <div id="summaryBox">
+
+                    <h2>
+                        Тапсырыс қорытындысы
+                    </h2>
+
+                    <p class="summary-subtitle">
+                        Брондауға дейін мәліметтерді тексеріңіз.
+                    </p>
+
+                    <div class="cost-line">
+                        <span>
+                            Билет саны
+                        </span>
+
+                        <strong id="ticketCount">
+                            0
+                        </strong>
+                    </div>
+
+                    <div class="cost-line">
+                        <span>
+                            Бір билет бағасы
+                        </span>
+
+                        <strong>
+                            2 500 ₸
+                        </strong>
+                    </div>
+
+                    <div class="cost-line">
+                        <span>
+                            Қызмет ақысы
+                        </span>
+
+                        <strong id="serviceFee">
+                            0 ₸
+                        </strong>
+                    </div>
+
+                    <div class="total-line">
+                        <span>
+                            Барлығы
+                        </span>
+
+                        <strong id="totalPrice">
+                            0 ₸
+                        </strong>
+                    </div>
+
+                    <p class="pay-title">
+                        Төлем әдісі
+                    </p>
+
+                    <div class="payment-options">
+
+                        <button
+                            class="pay-option selected"
+                            type="button"
+                            data-pay="Картамен"
+                        >
+                            Карта
+                        </button>
+
+                        <button
+                            class="pay-option"
+                            type="button"
+                            data-pay="Kaspi"
+                        >
+                            Kaspi
+                        </button>
+
+                        <button
+                            class="pay-option"
+                            type="button"
+                            data-pay="Касса"
+                        >
+                            Касса
+                        </button>
+
+                    </div>
+
+                    <button
+                        id="bookButton"
+                        class="primary-btn"
+                        type="button"
+                    >
+                        Брондау және жалғастыру
+                    </button>
+
+                    <button
+                        id="backButton"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        Орындарға қайту
+                    </button>
+
+                    <div class="secure">
+                        🔒 Сіздің деректеріңіз қорғалған.
+                        Бұл оқу-жобаға арналған брондау беті.
+                    </div>
+
+                </div>
+
+                <div
+                    id="successBox"
+                    class="success"
+                >
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+                    <h2>
+                        Билет брондалды!
+                    </h2>
+
+                    <p id="successText">
+                    </p>
+
+                    <div
+                        id="bookingCode"
+                        class="booking-code"
+                    >
+                    </div>
+
+                    <button
+                        id="printButton"
+                        class="primary-btn"
+                        type="button"
+                    >
+                        Билетті басып шығару
+                    </button>
+
+                    <button
+                        id="homeButton"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        Басты бетке қайту
+                    </button>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <div
+        id="toast"
+        class="toast"
+    >
+    </div>
+
+    <script>
+        const films = {
+            1: {
+                title: "14 күн",
+                genre: "Комедия • Драма • Қазақстан",
+                duration: "1 сағ 45 мин",
+                age: "12+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/3817a03a-3961-535e-847f-d97c82cc64e7/0af98422-8d5d-5204-9f00-361f34eddb23.jpg"
+            },
+
+            2: {
+                title: "38. Соңғы нүкте",
+                genre: "Драма • Триллер",
+                duration: "1 сағ 52 мин",
+                age: "16+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/3496d9fc-0809-53a2-8f59-4bd9185d7455/78b7eb7a-896e-57ff-b047-c69590dd28e7.jpg"
+            },
+
+            3: {
+                title: "Астрал 6",
+                genre: "Ужасы • Триллер",
+                duration: "1 сағ 48 мин",
+                age: "18+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/82e38f17-2865-5fd3-98e2-52582eaa0a22/a1991191-6e8d-5dde-be47-dd7efca01bfb.jpg"
+            },
+
+            4: {
+                title: "Болған оқиға 2",
+                genre: "Комедия • Оқиға",
+                duration: "1 сағ 38 мин",
+                age: "12+",
+                image:
+                    "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=90"
+            },
+
+            5: {
+                title: "Вышка 2",
+                genre: "Триллер • Драма",
+                duration: "1 сағ 56 мин",
+                age: "16+",
+                image:
+                    "https://st.perplexity.ai/estatic/0b226c450798410ac541646c86ec31afd840e5beab817a5d84fa821e7db61981ec84c3b4a3f072a7a2e1899c9fb06c6e106d7ca9f0ae214cda3cace330b508e1fea0f3ce1ca88adb550a651b538f043c36554b89e2535b32b083455a7b430f65ebf781d0043b275170a66e81e9327f63"
+            },
+
+            6: {
+                title: "Бегущая",
+                genre: "Боевик • Триллер",
+                duration: "1 сағ 42 мин",
+                age: "16+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/6362e1ab-336c-5614-a2ee-75531753a1c9/4489c1e4-fff4-5973-9ced-bd9cf9de88d5.jpg"
+            },
+
+            7: {
+                title: "Крушение рейса",
+                genre: "Боевик • Ужасы • Триллер",
+                duration: "1 сағ 46 мин",
+                age: "16+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/f957372c-606d-58eb-90c7-396cb894dcf7/81eb7c7a-0273-5988-a69b-29444c4f41c4.jpg"
+            },
+
+            8: {
+                title: "Надежда",
+                genre: "Фантастика • Экшен • Триллер",
+                duration: "2 сағ 10 мин",
+                age: "16+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/b9e8bc79-207d-5276-ac61-8da95d3f336e/8be74fa1-79a9-536b-b2b1-1e7a848b64b0.jpg"
+            },
+
+            9: {
+                title: "Фамилия",
+                genre: "Драма • Криминал",
+                duration: "1 сағ 50 мин",
+                age: "16+",
+                image:
+                    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=90"
+            },
+
+            10: {
+                title: "Бүркітші",
+                genre: "Драма • Қазақстан",
+                duration: "1 сағ 35 мин",
+                age: "6+",
+                image:
+                    "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/72f0e14c-c19f-56e1-85c0-87f309104270/0af98422-8d5d-5204-9f00-361f34eddb23.jpg"
+            }
+        };
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const movieId =
+            params.get("movie") || "1";
+
+        const day =
+            params.get("day") || "Бүгін";
+
+        const time =
+            params.get("time") || "17:30";
+
+        const hall =
+            params.get("hall") || "Зал №3";
+
+        const seats =
+            (params.get("seats") || "")
+                .split(",")
+                .filter(Boolean);
+
+        const ticketPrice = 2500;
+        const serviceFee = 300;
+
+        let adminFilm = null;
+
+        try {
+            const savedMovies =
+                JSON.parse(
+                    localStorage.getItem(
+                        "adminMovies"
+                    )
+                ) || [];
+
+            const savedMovie =
+                savedMovies.find(
+                    (movie) =>
+                        `admin-${movie.id}` ===
+                        movieId
+                );
+
+            if (savedMovie) {
+                adminFilm = {
+                    id: movieId,
+                    title: savedMovie.title,
+                    genre: savedMovie.genre,
+                    duration: savedMovie.duration,
+                    age: savedMovie.age,
+                    image: savedMovie.poster
+                };
+            }
+        } catch (error) {
+            adminFilm = null;
+        }
+
+        const film =
+            films[movieId] ||
+            adminFilm ||
+            films[1];
+
+        if (film.id === 5) {
+            film.image =
+                "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=90";
+        }
+
+        const ticketPoster =
+            document.getElementById("ticketPoster");
+
+        const ticketMovie =
+            document.getElementById("ticketMovie");
+
+        const ticketGenre =
+            document.getElementById("ticketGenre");
+
+        const ticketDuration =
+            document.getElementById(
+                "ticketDuration"
+            );
+
+        const ticketAge =
+            document.getElementById("ticketAge");
+
+        const ticketDay =
+            document.getElementById("ticketDay");
+
+        const ticketTime =
+            document.getElementById("ticketTime");
+
+        const ticketHall =
+            document.getElementById("ticketHall");
+
+        const ticketSeat =
+            document.getElementById("ticketSeat");
+
+        const ticketCount =
+            document.getElementById(
+                "ticketCount"
+            );
+
+        const serviceFeeText =
+            document.getElementById(
+                "serviceFee"
+            );
+
+        const totalPriceText =
+            document.getElementById(
+                "totalPrice"
+            );
+
+        const toast =
+            document.getElementById("toast");
+
+        const total =
+            seats.length > 0
+                ? seats.length * ticketPrice +
+                  serviceFee
+                : 0;
+
+        ticketPoster.src =
+            film.id === 5
+                ? "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=90"
+                : film.image;
+
+        ticketMovie.textContent =
+            film.title;
+
+        ticketGenre.textContent =
+            film.genre;
+
+        ticketDuration.textContent =
+            film.duration;
+
+        ticketAge.textContent =
+            film.age;
+
+        ticketDay.textContent =
+            day;
+
+        ticketTime.textContent =
+            time;
+
+        ticketHall.textContent =
+            hall;
+
+        ticketSeat.textContent =
+            seats.length
+                ? seats.join(", ")
+                : "Орын таңдалмады";
+
+        ticketCount.textContent =
+            seats.length;
+
+        serviceFeeText.textContent =
+            seats.length
+                ? `${serviceFee.toLocaleString()} ₸`
+                : "0 ₸";
+
+        totalPriceText.textContent =
+            `${total.toLocaleString()} ₸`;
+
+        let selectedPayment =
+            "Картамен";
+
+        document
+            .querySelectorAll(".pay-option")
+            .forEach((button) => {
+                button.addEventListener(
+                    "click",
+                    () => {
+                        document
+                            .querySelectorAll(
+                                ".pay-option"
+                            )
+                            .forEach((item) => {
+                                item.classList.remove(
+                                    "selected"
+                                );
+                            });
+
+                        button.classList.add(
+                            "selected"
+                        );
+
+                        selectedPayment =
+                            button.dataset.pay;
+                    }
+                );
+            });
+
+        function showToast(text) {
+            toast.textContent =
+                text;
+
+            toast.classList.add("show");
+
+            clearTimeout(
+                showToast.timer
+            );
+
+            showToast.timer =
+                setTimeout(
+                    () => {
+                        toast.classList.remove(
+                            "show"
+                        );
+                    },
+                    2300
+                );
+        }
+
+        function validateForm() {
+            let valid = true;
+
+            const name =
+                document.getElementById(
+                    "customerName"
+                );
+
+            const phone =
+                document.getElementById(
+                    "customerPhone"
+                );
+
+            const email =
+                document.getElementById(
+                    "customerEmail"
+                );
+
+            const agreement =
+                document.getElementById(
+                    "agreement"
+                );
+
+            document
+                .querySelectorAll(".error")
+                .forEach((error) => {
+                    error.classList.remove(
+                        "show"
+                    );
+                });
+
+            if (!name.value.trim()) {
+                document
+                    .getElementById(
+                        "nameError"
+                    )
+                    .classList.add("show");
+
+                valid = false;
+            }
+
+            if (!phone.value.trim()) {
+                document
+                    .getElementById(
+                        "phoneError"
+                    )
+                    .classList.add("show");
+
+                valid = false;
+            }
+
+            if (
+                !email.value.includes("@") ||
+                !email.value.includes(".")
+            ) {
+                document
+                    .getElementById(
+                        "emailError"
+                    )
+                    .classList.add("show");
+
+                valid = false;
+            }
+
+            if (!agreement.checked) {
+                showToast(
+                    "Шарттармен келісуіңіз керек"
+                );
+
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        document
+            .getElementById("bookButton")
+            .addEventListener(
+                "click",
+                () => {
+                    if (!seats.length) {
+                        showToast(
+                            "Алдымен орын таңдаңыз"
+                        );
+
+                        return;
+                    }
+
+                    if (!validateForm()) {
+                        return;
+                    }
+
+                    const code =
+                        "KP-" +
+                        Math.random()
+                            .toString(36)
+                            .slice(2, 8)
+                            .toUpperCase();
+
+                    document
+                        .getElementById(
+                            "summaryBox"
+                        )
+                        .style.display = "none";
+
+                    document
+                        .getElementById(
+                            "successBox"
+                        )
+                        .classList.add("show");
+
+                    document
+                        .getElementById(
+                            "bookingCode"
+                        )
+                        .textContent = code;
+
+                    document
+                        .getElementById(
+                            "successText"
+                        )
+                        .textContent =
+                        `${film.title} фильміне ` +
+                        `${day}, ${time} уақытында ` +
+                        `${seats.join(", ")} орындары ` +
+                        `брондалды. Төлем әдісі: ` +
+                        `${selectedPayment}.`;
+
+                    sessionStorage.setItem(
+                        "kinoparkBooking",
+                        JSON.stringify({
+                            code,
+                            movie: film.title,
+                            day,
+                            time,
+                            seats,
+                            total,
+                            payment:
+                                selectedPayment,
+                            customer:
+                                document
+                                    .getElementById(
+                                        "customerName"
+                                    )
+                                    .value
+                        })
+                    );
+
+                        const savedBookings =
+                            JSON.parse(
+                                localStorage.getItem(
+                                    "kinoparkBookings"
+                                )
+                            ) || [];
+
+                        savedBookings.push({
+                            code,
+                            customer:
+                                document
+                                    .getElementById(
+                                        "customerName"
+                                    )
+                                    .value,
+                            movie: film.title,
+                            day,
+                            time,
+                            hall,
+                            seats,
+                            total,
+                            payment:
+                                selectedPayment,
+                            status: "Забронирован"
+                        });
+
+                        localStorage.setItem(
+                            "kinoparkBookings",
+                            JSON.stringify(
+                                savedBookings
+                            )
+                        );
+                }
+            );
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                () => {
+                    window.history.back();
+                }
+            );
+
+        document
+            .getElementById("homeButton")
+            .addEventListener(
+                "click",
+                () => {
+                    window.location.href =
+                        "index.html";
+                }
+            );
+
+        document
+            .getElementById("printButton")
+            .addEventListener(
+                "click",
+                () => {
+                    window.print();
+                }
+            );
+    </script>
+
+</body>
+</html>

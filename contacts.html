@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Байланыс — KINOPARK 7</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --nav: #07101f;
+            --nav-card: #101c31;
+
+            --ink: #172554;
+            --muted: #64748b;
+            --line: #e2e8f0;
+
+            --blue: #2563eb;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+            --green: #16a34a;
+
+            --warm:
+                linear-gradient(
+                    135deg,
+                    #ffe45e,
+                    #ff8a3d,
+                    #ff3d71
+                );
+
+            --button:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--ink);
+            font-family: Arial, Inter, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 5% 0%,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 95% 15%,
+                    rgba(236, 72, 153, 0.12),
+                    transparent 28%
+                ),
+                #f5f7fb;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 14px 0;
+
+            background: var(--nav);
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        nav {
+            width: min(1200px, calc(100% - 32px));
+            min-height: 65px;
+
+            margin: auto;
+            padding: 10px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+
+            background: var(--nav-card);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: #25152d;
+            background: var(--warm);
+        }
+
+        .menu {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .menu a {
+            padding: 9px 11px;
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(1180px, calc(100% - 32px));
+
+            margin: auto;
+            padding: 55px 0 85px;
+        }
+
+        .title {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .red {
+            color: #e11d48;
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+        }
+
+        .title h1 {
+            margin: 16px 0 10px;
+
+            font-family: Georgia, serif;
+            font-size: clamp(40px, 6vw, 66px);
+        }
+
+        .title h1 span {
+            background: var(--warm);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .title p:last-child {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            margin-bottom: 22px;
+            padding: 30px;
+
+            border-radius: 20px;
+
+            color: #ffffff;
+            background:
+                linear-gradient(
+                    125deg,
+                    #111c35,
+                    #1d356d,
+                    #7c2d62
+                );
+
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.2);
+        }
+
+        .hero h2 {
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            color: #dbeafe;
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .hero-icon {
+            width: 100px;
+            height: 100px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            font-size: 51px;
+        }
+
+        /* CONTACT CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 24px;
+
+            border: 1px solid var(--line);
+            border-radius: 17px;
+
+            background: #ffffff;
+            box-shadow:
+                0 12px 32px rgba(15, 23, 42, 0.07);
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 20px 42px rgba(15, 23, 42, 0.14);
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 17px;
+
+            border-radius: 15px;
+
+            color: #ffffff;
+            background: var(--button);
+
+            font-size: 25px;
+        }
+
+        .card:nth-child(2) .icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f97316,
+                    #ec4899
+                );
+        }
+
+        .card:nth-child(3) .icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #0d9488
+                );
+        }
+
+        .card h2 {
+            margin-bottom: 11px;
+
+            color: var(--ink);
+            font-size: 20px;
+        }
+
+        .card p {
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        .card strong {
+            color: var(--ink);
+        }
+
+        /* BUTTONS */
+
+        .button-row {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+
+            margin-top: 18px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            padding: 11px 14px;
+
+            border: 0;
+            border-radius: 9px;
+
+            color: #ffffff;
+            background: var(--button);
+
+            cursor: pointer;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 9px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .button.light {
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .button.light:hover {
+            background: #dbeafe;
+            box-shadow: none;
+        }
+
+        /* LOWER INFO */
+
+        .lower {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+
+            margin-top: 18px;
+        }
+
+        .box {
+            padding: 25px;
+
+            border: 1px solid var(--line);
+            border-radius: 17px;
+
+            background: #ffffff;
+            box-shadow:
+                0 12px 32px rgba(15, 23, 42, 0.07);
+        }
+
+        .box h2 {
+            margin-bottom: 17px;
+
+            color: var(--ink);
+            font-size: 21px;
+        }
+
+        .line {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .line:last-child {
+            border: 0;
+        }
+
+        .line-icon {
+            width: 31px;
+            height: 31px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .line h3 {
+            margin-bottom: 3px;
+
+            color: var(--ink);
+            font-size: 13px;
+        }
+
+        .line p,
+        .line a {
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .phone {
+            display: block;
+
+            color: #1d4ed8 !important;
+            font-weight: 800;
+        }
+
+        .phone:hover {
+            color: #be123c !important;
+        }
+
+        /* MAP */
+
+        .map {
+            min-height: 220px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #e0e7ff,
+                    #fce7f3
+                );
+
+            text-align: center;
+        }
+
+        .map-pin {
+            font-size: 45px;
+        }
+
+        .map h3 {
+            margin: 8px 0;
+
+            color: var(--ink);
+            font-size: 20px;
+        }
+
+        .map p {
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* MODAL */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+
+            display: none;
+            place-items: center;
+
+            padding: 20px;
+
+            background: rgba(7, 16, 31, 0.6);
+        }
+
+        .modal.show {
+            display: grid;
+        }
+
+        .modal-card {
+            width: min(460px, 100%);
+
+            padding: 28px;
+
+            border-radius: 17px;
+
+            background: #ffffff;
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-card h2 {
+            margin-bottom: 10px;
+            color: var(--ink);
+        }
+
+        .modal-card p {
+            margin-bottom: 15px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .close {
+            float: right;
+
+            border: 0;
+
+            color: var(--muted);
+            background: none;
+
+            cursor: pointer;
+
+            font-size: 24px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .form input,
+        .form textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: 0;
+
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .form textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form input:focus,
+        .form textarea:focus {
+            border-color: var(--pink);
+            box-shadow:
+                0 0 0 3px rgba(236, 72, 153, 0.12);
+        }
+
+        .status {
+            display: none;
+
+            margin-top: 13px;
+            padding: 11px;
+
+            border-radius: 8px;
+
+            color: #166534;
+            background: #f0fdf4;
+
+            font-size: 12px;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 42px 20px 30px;
+
+            color: #94a3b8;
+            background: #040715;
+
+            text-align: center;
+        }
+
+        footer h3 {
+            color: #ffffff;
+            font-size: 25px;
+        }
+
+        footer h3 span {
+            color: #ffe45e;
+        }
+
+        footer p {
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 650px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .menu {
+                justify-content: center;
+            }
+
+            main {
+                width: calc(100% - 20px);
+                padding-top: 30px;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-icon {
+                width: 100%;
+                height: 70px;
+            }
+
+            .cards,
+            .lower {
+                grid-template-columns: 1fr;
+            }
+
+            .card:last-child {
+                grid-column: auto;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <nav>
+
+            <a href="index.html" class="logo">
+                <span>7</span>
+                KINOPARK
+            </a>
+
+             <div class="menu">
+
+                <a href="index.html" class="active">
+                    Басты бет
+                </a>
+
+                <a href="movie.html" class="active">
+                    Кино таңдау
+                </a>
+
+                <a href="seats.html" class="active">
+                    Орын таңдау
+                </a>
+
+                <a href="ticket.html" class="active">
+                    Билеттер
+                </a>
+
+                <a href="contacts.html" class="active">
+                    Байланыс
+                </a>
+                <a href="admin.html" class="active">
+                    Админстратор
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="title">
+
+            <p class="red">
+                KINOPARK 7 • АҚТӨБЕ
+            </p>
+
+            <h1>
+                Бізбен
+                <span>байланысыңыз</span>
+            </h1>
+
+            <p>
+                Кино, билет және сеанс туралы сұрақтарыңыз болса,
+                бізге хабарласыңыз.
+            </p>
+
+        </section>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div>
+                <h2>
+                    KINOPARK 7 KeruenCity
+                </h2>
+
+                <p>
+                    Ақтөбедегі заманауи кинотеатр.
+                    Күн сайын жаңа фильмдер, ыңғайлы залдар
+                    және сапалы дыбыс пен үлкен экран.
+                </p>
+            </div>
+
+            <div class="hero-icon">
+                🎬
+            </div>
+
+        </section>
+
+        <!-- CONTACT CARDS -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <div class="icon">
+                    📍
+                </div>
+
+                <h2>
+                    Мекенжай
+                </h2>
+
+                <p>
+                    Ақтөбе қаласы<br>
+                    Мәншүк Мәметова көшесі, 4<br>
+                    <strong>
+                        KeruenCity, 3-қабат
+                    </strong>
+                </p>
+
+                <div class="button-row">
+                    <a
+                        class="button light"
+                        href="https://2gis.kz/aktobe/firm/70000001031758632"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        2GIS ашу →
+                    </a>
+
+                    <a
+                        class="button light"
+                        href="https://www.google.com/maps/search/?api=1&query=Kinopark+7+KeruenCity+Aktobe"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Карта →
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="icon">
+                    🎟️
+                </div>
+
+                <h2>
+                    Билет және афиша
+                </h2>
+
+                <p>
+                    Фильмдерді қарап, сеанс уақытын таңдап,
+                    бос орындарды белгілеңіз.
+                </p>
+
+                <div class="button-row">
+                    <a
+                        class="button"
+                        href="films.html"
+                    >
+                        Киноларды көру →
+                    </a>
+
+                    <a
+                        class="button light"
+                        href="movie.html"
+                    >
+                        Сеанс таңдау →
+                    </a>
+                    <a href="admin.html">
+                    Админстратор
+                </a>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="icon">
+                    🕐
+                </div>
+
+                <h2>
+                    Жұмыс уақыты
+                </h2>
+
+                <p>
+                    Күн сайын<br>
+                    <strong>
+                        10:00 — 03:00
+                    </strong><br>
+                    Нақты сеанс уақыты фильмге байланысты.
+                </p>
+
+                <div class="button-row">
+                    <a
+                        class="button light"
+                        href="tel:+77132777025"
+                    >
+                        Қоңырау шалу ☎
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LOWER BLOCKS -->
+
+        <section class="lower">
+
+            <div class="box">
+
+                <h2>
+                    Байланыс телефондары
+                </h2>
+
+                <div class="line">
+                    <div class="line-icon">
+                        ☎
+                    </div>
+
+                    <div>
+                        <h3>
+                            Кинотеатр кассасы
+                        </h3>
+
+                        <a
+                            class="phone"
+                            href="tel:+77132777025"
+                        >
+                            +7 (7132) 77-70-25
+                        </a>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="line-icon">
+                        📞
+                    </div>
+
+                    <div>
+                        <h3>
+                            Қосымша телефон
+                        </h3>
+
+                        <a
+                            class="phone"
+                            href="tel:+77017674602"
+                        >
+                            +7 (701) 767-46-02
+                        </a>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="line-icon">
+                        ✉
+                    </div>
+
+                    <div>
+                        <h3>
+                            Хат жазу
+                        </h3>
+
+                        <a
+                            class="phone"
+                            href="mailto:info@kinopark.kz"
+                        >
+                            info@kinopark.kz
+                        </a>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button
+                        class="button"
+                        id="questionBtn"
+                        type="button"
+                    >
+                        Сұрақ жіберу
+                    </button>
+
+                    <a
+                        class="button light"
+                        href="https://www.kinopark.kz/"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Ресми сайт →
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="box">
+
+                <h2>
+                    Кинотеатрды табу
+                </h2>
+
+                <div class="map">
+
+                    <div>
+                        <div class="map-pin">
+                            📍
+                        </div>
+
+                        <h3>
+                            KeruenCity
+                        </h3>
+
+                        <p>
+                            Мәншүк Мәметова көшесі, 4<br>
+                            Ақтөбе қаласы, 3-қабат
+                        </p>
+
+                        <div class="button-row">
+                            <a
+                                class="button"
+                                href="https://2gis.kz/aktobe/firm/70000001031758632"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                Маршрут құру →
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <h3>
+            KINOPARK <span>7</span>
+        </h3>
+
+        <p>
+            Ақтөбе • KeruenCity • Мәншүк Мәметова, 4
+        </p>
+
+        <p>
+            © 2026 KINOPARK 7
+        </p>
+    </footer>
+
+    <!-- QUESTION MODAL -->
+
+    <div
+        id="modal"
+        class="modal"
+    >
+
+        <div class="modal-card">
+
+            <button
+                id="closeBtn"
+                class="close"
+                type="button"
+            >
+                ×
+            </button>
+
+            <h2>
+                Сұрақ жіберу
+            </h2>
+
+            <p>
+                Хабарламаңызды жазыңыз. Бұл оқу-жоба болғандықтан,
+                форма демонстрациялық түрде жұмыс істейді.
+            </p>
+
+            <form
+                id="questionForm"
+                class="form"
+            >
+
+                <input
+                    id="name"
+                    required
+                    placeholder="Аты-жөніңіз"
+                >
+
+                <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="Email"
+                >
+
+                <textarea
+                    id="question"
+                    required
+                    placeholder="Сұрағыңыз"
+                >
+                </textarea>
+
+                <button
+                    class="button"
+                    type="submit"
+                >
+                    Жіберу →
+                </button>
+
+            </form>
+
+            <div
+                id="status"
+                class="status"
+            >
+                Хабарламаңыз сәтті жіберілді!
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const modal =
+            document.getElementById("modal");
+
+        const questionBtn =
+            document.getElementById(
+                "questionBtn"
+            );
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+        const form =
+            document.getElementById(
+                "questionForm"
+            );
+
+        const status =
+            document.getElementById("status");
+
+        questionBtn.addEventListener(
+            "click",
+            () => {
+                modal.classList.add("show");
+            }
+        );
+
+        closeBtn.addEventListener(
+            "click",
+            () => {
+                modal.classList.remove("show");
+            }
+        );
+
+        modal.addEventListener(
+            "click",
+            (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove(
+                        "show"
+                    );
+                }
+            }
+        );
+
+        form.addEventListener(
+            "submit",
+            (event) => {
+                event.preventDefault();
+
+                form.style.display = "none";
+
+                status.classList.add("show");
+
+                setTimeout(
+                    () => {
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                        form.reset();
+
+                        form.style.display =
+                            "flex";
+
+                        status.classList.remove(
+                            "show"
+                        );
+                    },
+                    2200
+                );
+            }
+        );
+    </script>
+
+</body>
+</html>
